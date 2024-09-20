@@ -2,6 +2,6 @@
 {
     public interface ISaveable
     {
-        string Key { get; }
+        Keys Key { get; }
     }
 }

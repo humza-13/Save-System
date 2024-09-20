@@ -27,31 +27,31 @@ namespace Phoenix.SaveLoad
         
         public void Save<T>(T data, bool overwrite = true) where T : ISaveable
         {
-            string fileLocation = GetFilePath(data.Key);
+            string fileLocation = GetFilePath(data.Key.ToString());
 
             if (!overwrite && File.Exists(fileLocation))
-                throw new IOException($"File'{data.Key}.{_fileExtension}' already exists and cannot be overwritten.");
+                throw new IOException($"File'{data.Key.ToString()}.{_fileExtension}' already exists and cannot be overwritten.");
             
             File.WriteAllText(fileLocation, _serializer.Serialize(data));
 
         }
 
-        public T Load<T>(string key) where T : ISaveable
+        public T Load<T>(Keys key) where T : ISaveable
         {
-            string fileLocation = GetFilePath(key);
+            string fileLocation = GetFilePath(key.ToString());
 
             if (!File.Exists(fileLocation))
-                throw new IOException($"File'{key}.{_fileExtension}' not found.");
+                throw new IOException($"File'{key.ToString()}.{_fileExtension}' not found.");
             
             return _serializer.Deserialize<T>(File.ReadAllText(fileLocation));
         }
 
-        public void Delete(string key)
+        public void Delete(Keys key)
         {
-            string fileLocation = GetFilePath(key);
+            string fileLocation = GetFilePath(key.ToString());
 
             if (!File.Exists(fileLocation))
-                throw new IOException($"File'{key}.{_fileExtension}' not found.");
+                throw new IOException($"File'{key.ToString()}.{_fileExtension}' not found.");
             
             File.Delete(fileLocation);
         }

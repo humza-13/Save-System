@@ -1,12 +1,11 @@
 ﻿namespace Phoenix.SaveLoad
 {
-    public abstract class SaveableData
+    public abstract class SaveableData: ISaveable
     {
-        public string key { get; protected set; }
-
-        protected SaveableData(string key)
+        protected SaveableData(Keys key)
         {
-            this.key = key;
+            this.Key = key;
         }
+        public Keys Key { get; protected set;}
     }
 }

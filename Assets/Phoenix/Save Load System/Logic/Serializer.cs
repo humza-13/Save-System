@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json;
+using UnityEngine;
 
 namespace Phoenix.SaveLoad
 {
@@ -6,12 +7,12 @@ namespace Phoenix.SaveLoad
     {
         public string Serialize<T>(T obj)
         {
-            return JsonUtility.ToJson(obj, true);
+            return JsonConvert.SerializeObject(obj);
         }
 
         public T Deserialize<T>(string json)
         {
-            return JsonUtility.FromJson<T>(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
     }
 }
